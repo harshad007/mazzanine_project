@@ -8,7 +8,11 @@ FROM busybox
 MAINTAINER hvelapure@yahoo.com
 
 # Install required packages mazzanine
-RUN  apt-get install python-pip python-dev python-setuptools python-imaging build-essential
+RUN apt-get install python-pip 
+RUN apt-get install python-dev
+RUN apt-get install python-setuptools
+RUN apt-get install python-imaging
+RUN apt-get install build-essential
 
 # Create virtual environment
 RUN pip install virtualenv
@@ -31,7 +35,8 @@ RUN mkvirtualenv --no-site-packages myfirstenv
 RUN workon myfirstenv 
 
 # Install additional packages
-RUN pip install south django-compressor
+RUN pip install south 
+RUN pip install django-compressor
 
 # Install Mezzanine
 RUN pip install mezzanine
