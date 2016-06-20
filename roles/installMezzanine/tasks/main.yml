@@ -1,0 +1,10 @@
+---
+
+- name: copy docker file to remote location
+  copy: src=/home/shailesh/Desktop/crossover/roles/installMezzanine/files/docker_setup dest=/home/ubuntu/docker_setup
+
+- name: run docker file
+  shell: 'docker build -t /home/shailesh/Desktop/crossover/roles/installMezzanine/files/docker_setup .'
+
+- name: run instance with docker container
+  shell: 'docker run -name mezzanine -i -t docker_setup'

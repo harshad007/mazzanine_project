@@ -1,0 +1,4 @@
+#handler to check docker service status
+
+- name: test docker
+  service: name=docker state=started

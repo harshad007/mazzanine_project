@@ -1,0 +1,37 @@
+#
+#  Docker image setup 
+#
+
+# Pull Base Image
+FROM busybox
+
+MAINTAINER hvelapure@yahoo.com
+
+# Install required packages mazzanine
+RUN  apt-get install python-pip python-dev python-setuptools python-imaging build-essential
+
+# Create virtual environment
+RUN pip install virtualenv
+
+# Virtual Environment wrapper
+RUN pip install virtualenvwrapper
+
+# Create Directory
+RUN mkdir ~/.virtualenvs
+
+# Required tasks
+RUN export WORKON_HOME=$HOME/.virtualenvs 
+RUN source /usr/local/bin/virtualenvwrapper.sh 
+RUN export PIP_VIRTUALENV_BASE=$WORKON_HOME
+
+# Next Step
+RUN mkvirtualenv --no-site-packages myfirstenv
+
+# Workon command
+RUN workon myfirstenv 
+
+# Install additional packages
+RUN pip install south django-compressor
+
+# Install Mezzanine
+RUN pip install mezzanine
