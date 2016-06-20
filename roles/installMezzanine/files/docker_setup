@@ -7,22 +7,25 @@ FROM ubuntu:14.04
 
 MAINTAINER hvelapure@yahoo.com
 
+# Install add-apt-repository
+RUN apt-get update && apt-get install -y software-properties-common && apt-get install -y python-software-properties
+RUN rm -rf /var/lib/apt/lists/*
 # Expose required ports
 EXPOSE 80 8080 22
 
 # Install required packages mazzanine
-
-RUN apt-get install python-pip 
-RUN apt-get install python-dev
-RUN apt-get install python-setuptools
-RUN apt-get install python-imaging
-RUN apt-get install build-essential
+RUN apt-get -y install python
+RUN apt-get -y install python-pip 
+RUN apt-get -y install python-dev
+RUN apt-get -y install python-setuptools
+RUN apt-get -y install python-imaging
+RUN apt-get -y install build-essential
 
 # Create virtual environment
-RUN pip install virtualenv
+RUN pip -y install virtualenv
 
 # Virtual Environment wrapper
-RUN pip install virtualenvwrapper
+RUN pip -y install virtualenvwrapper
 
 # Create Directory
 RUN mkdir ~/.virtualenvs
@@ -39,8 +42,8 @@ RUN mkvirtualenv --no-site-packages myfirstenv
 RUN workon myfirstenv 
 
 # Install additional packages
-RUN pip install south 
-RUN pip install django-compressor
+RUN pip -y install south 
+RUN pip -y install django-compressor
 
 # Install Mezzanine
-RUN pip install mezzanine
+RUN pip -y install mezzanine
