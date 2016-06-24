@@ -1,0 +1,21 @@
+
+root@cent4:/home/vagrant/docker_assign# vi test.ply
+---
+- hosts: node1
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: exe 1
+    shell: docker run -P -t --name web -p 172.17.0.1:8000:80 --link db:mezzanine_db harshad007/mezzanine
+
+  - name: ip
+    shell: docker inspect -f '{{ .NetworkSettings.IPAddress }}'
+    tags: ip
+    register: ip
+
+  - debug: var=ip
+
+  - name: db
+    shell: docker exec mezzanine_web python /myproject/manage.py createdb
+~
